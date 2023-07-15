@@ -10,6 +10,13 @@ var gmapsKey = "&key=AIzaSyAEixeDUTRcNwCXOgNXbeiS2yd-F6g4SZY";
 var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var reverseGeoLink = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
+var formContainerEl = document.getElementById("form-container");
+var userInputEl = document.getElementById("search-input");
+var btnEl = document.getElementById("search-button"); 
+
+
+
+
 // fetch call should be in function that it controls (eventhandler on search that calls funtion with this api) input filled saved as cityName
 // $("#searchBtn").on("click")function(){
 //   var cityName;}
@@ -56,15 +63,24 @@ ___________________________________________*/
 
 /*Functions Below
 ___________________________________________*/
+// Goal: When an input is entered on the webpage, it can be part of our fetch API issues. - Aaron
+   //What data are we getting? -User's location in City/Zip
+   //Where do we get it? - url: api + city + key
+   //How do we include it? - Declare variables. Create a function to get data. pass data on to another function. 
 
+function handleUserInput(event) {
+   event.preventDefault()
+   var inputData = userInputEl.value
 
+   runApi(inputData);
+}
 
 
 
 
 /*Event Listeners Below
 ___________________________________________*/
-
+formContainerEl.addEventListener(click, handleUserInput)
 
 /*
 Variables
