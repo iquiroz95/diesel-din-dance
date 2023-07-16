@@ -75,12 +75,33 @@ function handleUserInput(event) {
    runApi(inputData);
 }
 
+// potential Search function --
+function searchGasStation(){
+  var cityInput=document.getElementById('user-input').value;
+  var fuelTypeInput=document.getElementById('fuel-type-input').value; // need to add more to this function this is just a start (TM-07/15)
 
+  findGasStations(cityInput,fuelTypeInput) //This function is taking in the city and fuel type parameters. in this function we will use API to FETCH the gas station data. 
+}
+//FUNCTION TO DISPLAY RESULTS
 
+function displayGastStations(gasStations){
+  var resultContainer= document.getElementsByClassName("results-container");
+  resultsContainer.innerHTML= '';//
+}
+
+gasStations.forEach((station) => {
+  var stationElement= document.createElement('div');
+  //Populate stationElement with station details (Name, address,etc..)
+  resultContainer.appendChild(stationElement);
+});
+// "forEach is used to itterate over each element in the gasStation array"// for each "station" in the "gasStations" array the callback function is executed.
+//created a new div as a container for the gas station details
+//append 'stationElement' as a child of 'resultsContainer' element. This adds the gas station container to the DOM making it visible on the webpage.
 
 /*Event Listeners Below
 ___________________________________________*/
-formContainerEl.addEventListener(click, handleUserInput)
+formContainerEl.addEventListener(click, handleUserInput) // I think we have to put the eventListener on the actual button element.
+btnEl.addEventListener("click", searchGasStation);
 
 /*
 Variables
