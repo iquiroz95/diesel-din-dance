@@ -74,7 +74,7 @@ ___________________________________________*/
 function handleUserInput(event) {
   
    event.preventDefault()
-   var fuelTypeInput = userInputEl.value
+   var fuelTypeInput =document.getElementById('fuel-type-input').value
 
    runApi(fuelTypeInput);
 }
@@ -103,6 +103,7 @@ function runApi(fuelTypeInput) {
     //  h2El.textContent = data.name;
      // append the element to the currentContainer
     //  currentContainer.append(h2El)
+    
   })
 }
 
