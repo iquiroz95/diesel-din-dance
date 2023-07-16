@@ -86,6 +86,12 @@ function runApi(fuelTypeInput) {
   })
   .then(function (data) {
      console.log(data);
+     var h2El = document.createElement("h2")
+     h2El.textContent= data.station_counts.fuels;
+     var resultsContainer = document.getElementsByClassName("results-container")[0];
+     resultsContainer.append(h2El);
+
+
 
 //      fetch(gasUrl)
 // .then(function (response) {
