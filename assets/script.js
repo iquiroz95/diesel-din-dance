@@ -15,7 +15,7 @@ var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var reverseGeoLink = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
 var formEl = document.getElementById("search-form");
-var cityInputEl = document.getElementById('search-input');
+var inputEl = document.getElementById('search-input');
 var fuelTypeInputEl = document.getElementById("fuel-type");
 var btnEl = document.getElementById("search-button"); 
 
@@ -30,12 +30,12 @@ ___________________________________________*/
 function handleUserInput(event) {
    event.preventDefault()
    var fuelTypeInput = fuelTypeInputEl.value;
-   var cityInput = cityInputEl.value;
-   runFuelApi(fuelTypeInput,cityInput);
+   var inputEl = inputEl.value;
+   runFuelApi(fuelTypeInput,inputEl);
 }
 
-function runFuelApi(fuelType,city) {
-  var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&city=" + city + "&limit=5"
+function runFuelApi(fuelType,zip) {
+  var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit=5"
   fetch(urlFuel)
   .then(function (response) {
      return response.json();
