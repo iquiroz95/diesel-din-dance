@@ -46,18 +46,6 @@ function runFuelApi(fuelType,zip) {
   })
 }
 
-// function runCityApi(city) {
-//    var cityUrl = gasApiUrl + "&city=" + city + "&limit=5";
-//    fetch(cityUrl)
-//    .then(function (response) {
-//       return response.json();
-//    })
-//    .then(function (data) {
-//       console.log(data);
-//    })
-//  }
-
-
 function searchGasStation(){
   var cityInput=document.getElementById('user-input').value;
    var fuelTypeInput=document.getElementById('fuel-type-input').value; 
