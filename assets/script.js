@@ -5,8 +5,6 @@ ___________________________________________*/
 var gasKey = "WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y";
 var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public";
 
-//fuel_type=BD,RD&access=public";
-
 var cityApiKey ="1dIcTElI66WvN1pN1tuvnw==sPZpayHEUdUki5rP";
 var cityApiLink= "https://api.api-ninjas.com/v1/city?name=";
 
@@ -15,9 +13,10 @@ var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var reverseGeoLink = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
 var formEl = document.getElementById("search-form");
-var inputEl = document.getElementById('search-input');
+var zipInputEl = document.getElementById('search-input');
 var fuelTypeInputEl = document.getElementById("fuel-type");
 var btnEl = document.getElementById("search-button"); 
+var resultsContainer = document.getElementById("results-container");
 
 /*Functions Below
 ___________________________________________*/
@@ -30,8 +29,8 @@ ___________________________________________*/
 function handleUserInput(event) {
    event.preventDefault()
    var fuelTypeInput = fuelTypeInputEl.value;
-   var inputEl = inputEl.value;
-   runFuelApi(fuelTypeInput,inputEl);
+   var zipInput = zipInputEl.value;
+   runFuelApi(fuelTypeInput,zipInput);
 }
 
 function runFuelApi(fuelType,zip) {
@@ -41,10 +40,13 @@ function runFuelApi(fuelType,zip) {
      return response.json();
   })
   .then(function (data) {
-     console.log(data);
+   // data.forEach(this)
+      console.log(data.fuel_stations[0,1,2].zip)
+     })
+  }
 
-  })
-}
+
+
 
 function searchGasStation(){
   var cityInput=document.getElementById('user-input').value;
@@ -182,6 +184,18 @@ ___________________________________________*/
 //    })
 
 /*
+
+// function runCityApi(city) {
+//    var cityUrl = gasApiUrl + "&city=" + city + "&limit=5";
+//    fetch(cityUrl)
+//    .then(function (response) {
+//       return response.json();
+//    })
+//    .then(function (data) {
+//       console.log(data);
+//    })
+//  }
+
 Variables
    Conditionals 
       Loops 
