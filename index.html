@@ -11,19 +11,22 @@
         <h1 class="header-container">Diesel Locator</h1>
     </header>
     <main>
-        <div id="search-form" class="form-container">
-            <label for="user-input">Enter City / Zip Below</label><br> 
-            <input type="text" id="city-input" placeholder="Enter Here!">
-            <button type="submit" id="search-button">Search</button>
-            <label for="Fuel-Type">Select Fuel Type:</label>
-            <select name="Fuel-Type" id="fuel-type-input">
-                <option>-select-</option>
-                <option value="BD" id="BD">Bio Diesel</option>
-                <option value="ELEC" id="ELEC">Electric</option>
-                <option value="RD" id="RD">Renewable-Diesel</option>
-                <option value="LPG" id="LPG">Propane</option>
-            </select>
-        </div>
+        <section class="">
+            <form id="search-form" class="form-container">
+                <label for="search-input" value="city">Enter City / Zip Below</label>
+                <input type="text" id="search-input" placeholder="Enter Here!" class="form-input" name="search-form">
+                
+                <label for="fuel-type">Select Fuel Type:</label>
+                <select name="fuel-type" id="fuel-type">
+                    <option>-select-</option>
+                    <option value="BD" id="BD">Bio Diesel</option>
+                    <option value="ELEC" id="ELEC">Electric</option>
+                    <option value="RD" id="RD">Renewable-Diesel</option>
+                    <option value="LPG" id="LPG">Propane</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </section>
         <div id="" class="results-container">
             <h3 id="">Results Container Header Placeholder</h3>
             <li id="">line item placeholder</li> 
