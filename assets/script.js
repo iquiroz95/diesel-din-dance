@@ -13,9 +13,10 @@ var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var reverseGeoLink = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
 var formContainerEl = document.getElementById("form-container");
-var userInputEl = document.getElementById("search-input");
+var cityInputEl = document.getElementById("city-input");
 var btnEl = document.getElementById("search-button"); 
-var fuelTypeInput= document.getElementById("fuel-type-input")
+var fuelTypeInput= document.getElementById("fuel-type-input");
+
 
 
 
@@ -78,6 +79,14 @@ function handleUserInput(event) {
 
    runApi(fuelTypeInput);
 }
+
+// if you check line 78, that line is after the event.preventDefault.  That's why it keeps resetting.   However, that line is included in the runApi function, which is why it ran. 
+
+//Before, we only had one event listener.  the only event being listened to was the button. Once I added the fuelTypeInput to the event listeners, now it prevents default and saves the new values. 
+
+//This does create the issue of constantly runningApi when you click the dropdown menu, as now the eventListener listens to every event of the input, but it works fine, so I'm keeping it for now.
+
+
 function runApi(fuelTypeInput) {
   var apiURL = gasUrl + "&fuel_type=" + fuelTypeInput;
   fetch(apiURL)
@@ -86,34 +95,17 @@ function runApi(fuelTypeInput) {
   })
   .then(function (data) {
      console.log(data);
+
+     
+//the code under here is not necessary. All this function does is add parameters to the URL. Once the parameters are added properly, then we can search for specific things. What happens is your drop down menu adds the search parameter ("&fuel_type="... BD/ELEC/RD/LPG)... Now, we need to add the city parameters. The hard part might be the 2nd api, which will get the location of the user and map them to the gas station. That might be easy though...?
+
      var h2El = document.createElement("h2")
      h2El.textContent= data.station_counts.fuels;
      var resultsContainer = document.getElementsByClassName("results-container")[0];
      resultsContainer.append(h2El);
 
-
-
-//      fetch(gasUrl)
-// .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data);
-// });
-
-     // create elements. temperatureEl, humidityEl, windEl, dateEl, iconEl
-     //dateEl in Unix, convert to MM-DD-YYYY format
-     //attach elements to 'currentContainer'
-    //  var h2El = document.createElement('h2')
-     // add text content to the element
-    //  h2El.textContent = data.name;
-     // append the element to the currentContainer
-    //  currentContainer.append(h2El)
-    
   })
 }
-
-
 
 // potential Search function --
 function searchGasStation(){
@@ -148,7 +140,13 @@ function displayGastStations(gasStations){
 /*Event Listeners Below
 ___________________________________________*/
 //formContainerEl.addEventListener("submit", handleUserInput) 
-btnEl.addEventListener("click", handleUserInput);
+
+
+btnEl.addEventListener("click", handleUserInput); // this is to search
+fuelTypeInput.addEventListener("click",handleUserInput);
+cityInputEl.addEventListener("", handleUserInput);
+
+
 
 /*
 Variables
@@ -158,3 +156,24 @@ Variables
             Objects - Other Objects / Nouns 
                Arrays - Values 
                */
+
+
+
+
+//      fetch(gasUrl)
+// .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     console.log(data);
+// });
+
+     // create elements. temperatureEl, humidityEl, windEl, dateEl, iconEl
+     //dateEl in Unix, convert to MM-DD-YYYY format
+     //attach elements to 'currentContainer'
+    //  var h2El = document.createElement('h2')
+     // add text content to the element
+    //  h2El.textContent = data.name;
+     // append the element to the currentContainer
+    //  currentContainer.append(h2El)
+    
