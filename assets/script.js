@@ -34,6 +34,9 @@ function handleUserInput(event) {
 }
 
 function runFuelApi(fuelType,zip) {
+  console.log(zip, "zip")//test
+  console.log(fuelType, "Fuel")//test
+
   var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit=5"
   fetch(urlFuel)
   .then(function (response) {
@@ -41,7 +44,9 @@ function runFuelApi(fuelType,zip) {
   })
   .then(function (data) {
    // data.forEach(this)
-      console.log(data.fuel_stations[0,1,2].zip)
+      // console.log(data.fuel_stations[0].zip);
+      // console.log(data.fuel_stations[1].zip);
+      console.log(data);
      })
   }
 
@@ -49,7 +54,7 @@ function runFuelApi(fuelType,zip) {
 
 
 function searchGasStation(){
-  var cityInput=document.getElementById('user-input').value;
+  var cityInput=document.getElementById('search-input').value; // Changed this from "user-input" to "search-input"-T M. 7/17
    var fuelTypeInput=document.getElementById('fuel-type-input').value; 
    
 // need to add more to this function this is just a start (TM-07/15)
@@ -66,7 +71,7 @@ function findGasStations(city, fuelTypeInput){
 //FUNCTION TO DISPLAY RESULTS
 
 function displayGastStations(gasStations){
-  var resultContainer= document.getElementsByClassName("results-container");
+  var resultsContainer= document.getElementsByClassName("results-container");
   resultsContainer.innerHTML= '';//
 }
 
@@ -74,6 +79,7 @@ function displayGastStations(gasStations){
 _____________________________________________________________*/
 
 formEl.addEventListener("submit", handleUserInput);
+btnEl.addEventListener("click", searchGasStation);
 
 
 
