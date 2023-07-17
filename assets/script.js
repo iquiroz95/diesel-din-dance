@@ -17,10 +17,6 @@ var cityInputEl = document.getElementById("city-input");
 var btnEl = document.getElementById("search-button"); 
 var fuelTypeInput= document.getElementById("fuel-type-input");
 
-
-
-
-
 // fetch call should be in function that it controls (eventhandler on search that calls funtion with this api) input filled saved as cityName
 // $("#searchBtn").on("click")function(){
 //   var cityName;}
@@ -39,31 +35,7 @@ var fuelTypeInput= document.getElementById("fuel-type-input");
 //   console.log(data)
 // })
 
-/*Fetch Api Below - will be part of functions
-___________________________________________*/
-// fetch(gasUrl)
-// .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data);
-// });
 
-// fetch(geocode)
-// .then(function (response) {
-//    return response.json();
-//    })
-//    .then(function (data) {
-//    console.log(data);
-//    });
-
-// fetch(reverseGeocode)
-// .then(function(response) {
-//    return response.json();
-//    })
-//    .then(function(data) {
-//      console.log(data);
-//    })
 
 /*Functions Below
 ___________________________________________*/
@@ -177,3 +149,29 @@ Variables
      // append the element to the currentContainer
     //  currentContainer.append(h2El)
     
+
+/*Fetch Api Below - will be part of functions
+___________________________________________*/
+// fetch(gasUrl)
+// .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     console.log(data);
+// });
+
+// fetch(geocode)
+// .then(function (response) {
+//    return response.json();
+//    })
+//    .then(function (data) {
+//    console.log(data);
+//    });
+
+// fetch(reverseGeocode)
+// .then(function(response) {
+//    return response.json();
+//    })
+//    .then(function(data) {
+//      console.log(data);
+//    })
