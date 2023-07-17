@@ -22,4 +22,17 @@ h1{
    text-align: center;
 }
 
+input {
+   width:90%;
+}
+
+select {
+   width:100%;
+}
+
+button {
+   display:block;
+   width:100%;
+}
+
 
