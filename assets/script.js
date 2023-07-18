@@ -55,53 +55,40 @@ function runFuelApi(fuelType, city){
   var cityZipUrl= smartyUrl + "city=" + city + "&country=us" 
   fetch("https://app.zipcodebase.com/api/v1/code/city?apikey=85c64b60-259a-11ee-ba64-cd4912edca12&city="+city+"&country=us&limit=5")
   .then(function(response){
-    return response.json();
+    return response.json(); // we are given a return of multiple zip codes and want to turn them into an ARRAY so we can enter them in out gasAPI url.
   })
   .then(function(data){
-    console.log(data);
-    var zips = data.results.join(",")
+    console.log(data); 
+    var zips = data.results.join(",") //taking our zip codes found in data.results and forming an array with a comma to separate the zip codes to follow gasAPI documentation.
     console.log(zips) //
-    //displayGastStations(data.fuel_stations)
-getGasStations(zips)
+getGasStations(zips)// now running ZIPS (array) Through the getGasStations Functions and gas API
   })
 }
 
 function getGasStations(zips){
-var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public&zip="+zips;
+var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public&zip="+zips; //added zips parameter to API URL
   fetch( gasApiUrl)
   .then(function(response){
     return response.json();
   })
   .then(function(data){
     console.log(DataView);
-    displayResults(data.fuel_stations)
+    displayResults(data.fuel_stations) //Went through this path to get list of fuel_stations based on zips array
   })
 }
 
 function displayResults(gasStations){
-  for (var i = 0; i < gasStations.length; i++){
+  for (var i = 0; i < gasStations.length; i++){ // itterate through the array of gas stations we are given from results of gasAPI
     var gasStation = gasStations[i]
-    var addressEl = document.createElement("li")
-    addressEl.innerText= gasStation.street_address
-    document.querySelector(".results-container").appendChild(addressEl)
+    var addressEl = document.createElement("li")// create a list element to display list of results
+    addressEl.innerText= gasStation.street_address //pulling the street address from the gasStations array
+    document.querySelector(".results-container").appendChild(addressEl)//append the address of gas stations!
   }
 
 }
 
 
-// -------------------OLDER VERSION OF RUNFUELAPI FUNCTION---------------------
-// function runFuelApi(fuelType,latitude,longitude) {
-//   var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit"
-//   fetch(urlFuel)
-//   .then(function (response) {
-//      return response.json();
-//   })
-//   .then(function (data) {
-//    // data.forEach(this) //Reasearch this method to get children 
-//       console.log(data)
-//       displayGastStations(data.fuel_stations);
-//      })
-//   }
+
 
   
   //Append Results to the web page. (appened results-container) (DONE 6/17)
