@@ -3,8 +3,7 @@
 /* Variables Below
 ___________________________________________*/
 document.addEventListener("DOMContentLoaded", function(){ // this ensures the code executre only after the HTML doc has finished loading. may take down later ..
-var gasKey = "WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y";
-var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public";
+
 var gmapsKey = "&key=AIzaSyAEixeDUTRcNwCXOgNXbeiS2yd-F6g4SZY"; 
 var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var reverseGeoLink = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
@@ -60,9 +59,33 @@ function runFuelApi(fuelType, city){
   })
   .then(function(data){
     console.log(data);
+    var zips = data.results.join(",")
+    console.log(zips) //
     //displayGastStations(data.fuel_stations)
-
+getGasStations(zips)
   })
+}
+
+function getGasStations(zips){
+var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public&zip="+zips;
+  fetch( gasApiUrl)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(data){
+    console.log(DataView);
+    displayResults(data.fuel_stations)
+  })
+}
+
+function displayResults(gasStations){
+  for (var i = 0; i < gasStations.length; i++){
+    var gasStation = gasStations[i]
+    var addressEl = document.createElement("li")
+    addressEl.innerText= gasStation.street_address
+    document.querySelector(".results-container").appendChild(addressEl)
+  }
+
 }
 
 
@@ -100,21 +123,7 @@ function runFuelApi(fuelType, city){
 //FUNCTION TO DISPLAY RESULTS
 
 
-function displayGastStations(gasStations) {
-  console.log(gasStations)
-  //var resultContainer= document.getElementsByClassName("results-container");
-  resultsContainer.innerHTML= '';// Need to DISPLAY RESULTS. 
-  gasStations.forEach(function(gasStation){
-    var stationElement = document.createElement('div');
-    var address = gasStation.street_address; //was searching for value "address" instead of "street_address"
-    var city = gasStation.city;
-    var state = gasStation.state;
-    stationElement.textContent= city + " , " + state + " , " + address; // create a var and follow the path from the api to pull the info you want to show 
-    resultsContainer.appendChild(stationElement);
-    console.log(city)
-    
-  })
-}
+
 
 /*Event Listeners Below
 _____________________________________________________________*/
