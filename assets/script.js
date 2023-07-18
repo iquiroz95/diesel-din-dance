@@ -32,6 +32,8 @@ function handleUserInput(event) {
    event.preventDefault();// is there a better way do this? prevent propogation?
    var fuelTypeInput = fuelTypeInputEl.value;
    var zipInput = zipInputEl.value;
+   
+
    getCityInfo(zipInput)
    .then(function(cityInfo){
     var {latitude, longitude }= cityInfo;
@@ -46,7 +48,7 @@ function getCityInfo(zip){       /// -----Sample for this api was using JQUERY "
   var cityApiUrl = cityApiLink + zip;
   var headers = { 'X-Api-Key': cityApiKey };
 
-return fetch(cityApiUrl, {headers: headers })
+return fetch(cityApiUrl, {headers:headers})
 .then(function(response){
   if(!response.ok){
     throw new Error('City API reuqest failed');
@@ -63,8 +65,6 @@ return fetch(cityApiUrl, {headers: headers })
 });
   
 }
-
-
 
 
 function runFuelApi(fuelType, latitude, longitude){
