@@ -2,6 +2,7 @@
 
 /* Variables Below
 ___________________________________________*/
+document.addEventListener("DOMContentLoaded", function(){
 var gasKey = "WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y";
 var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public";
 
@@ -27,59 +28,60 @@ ___________________________________________*/
    
 
 function handleUserInput(event) {
-   event.preventDefault()
+   event.preventDefault()// is there a better way do this? prevent propogation?
    var fuelTypeInput = fuelTypeInputEl.value;
    var zipInput = zipInputEl.value;
    runFuelApi(fuelTypeInput,zipInput);
 }
 
 function runFuelApi(fuelType,zip) {
-  console.log(zip, "zip")//test
-  console.log(fuelType, "Fuel")//test
-
-  var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit=5"
+  var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit"
   fetch(urlFuel)
   .then(function (response) {
      return response.json();
   })
   .then(function (data) {
-   // data.forEach(this)
-      // console.log(data.fuel_stations[0].zip);
-      // console.log(data.fuel_stations[1].zip);
-      console.log(data);
+   // data.forEach(this) //Reasearch this method to get children 
+      console.log(data)
+      displayGastStations(data.fuel_stations);
      })
   }
 
+  //Append Results to the web page. (appened results-container)
+  // Find second API (city api)
+// Infor to pull from API - Address of Gas Station 
+// Find CSS library not BOOTSTRAP
+// JS library called sweet alerts (link)
 
 
 
-function searchGasStation(){
-  var cityInput=document.getElementById('search-input').value; // Changed this from "user-input" to "search-input"-T M. 7/17
-   var fuelTypeInput=document.getElementById('fuel-type-input').value; 
    
 // need to add more to this function this is just a start (TM-07/15)
-
-
-findGasStations(cityInput,fuelTypeInput) 
 //This function is taking in the city and fuel type parameters. in this function we will use API to FETCH the gas station data. 
-}
 
-function findGasStations(city, fuelTypeInput){
-}
 
 
 //FUNCTION TO DISPLAY RESULTS
 
-function displayGastStations(gasStations){
-  var resultsContainer= document.getElementsByClassName("results-container");
-  resultsContainer.innerHTML= '';//
+function displayGastStations(gasStations) {
+  console.log(gasStations)
+  //var resultContainer= document.getElementsByClassName("results-container");
+  resultsContainer.innerHTML= '';// Need to DISPLAY RESULTS. 
+  gasStations.forEach(function(gasStation){
+    var stationElement = document.createElement('div');
+    var address = gasStation.street_address;
+    stationElement.textContent= address;
+    resultsContainer.appendChild(stationElement);
+    
+  })
 }
 
 /*Event Listeners Below
 _____________________________________________________________*/
 
 formEl.addEventListener("submit", handleUserInput);
-btnEl.addEventListener("click", searchGasStation);
+
+})
 
 
 
