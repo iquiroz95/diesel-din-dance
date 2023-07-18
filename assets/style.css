@@ -1,18 +1,26 @@
 * {
    padding: 10px;
    border-radius:20px;
+
+
 }
 header {
    background-color:rgb(130, 224, 158);
    border-bottom: 3px solid black;
    border-radius:0px;
+   
 }
+
+
+
 main {
    display: flex;
    flex-wrap: wrap;
    border-radius:20px;
 }
 /*Made width 33% of page for now as reference. We can probably use CSS columns later. -Aaron*/
+
+
 .form-container {
    display: inline-block;
    background-color:rgb(130, 224, 158);
@@ -38,4 +46,7 @@ button {
    display:block;
    width:100%;
 }
+
+
+
 
