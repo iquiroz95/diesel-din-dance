@@ -26,28 +26,22 @@ main {
    background-color:rgb(130, 224, 158);
    border: 3px solid black;
    width: 100%;
-   
 }
-
 .results-container {
    display: inline-block;
    background-color:azure;
    border: 3px solid black;
    width: 100%;
 }
-
 h1{
    text-align: center;
 }
-
 input {
    width:90%;
 }
-
 select {
    width:100%;
 }
-
 button {
    display:block;
    width:100%;
