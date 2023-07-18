@@ -5,11 +5,6 @@ ___________________________________________*/
 document.addEventListener("DOMContentLoaded", function(){ // this ensures the code executre only after the HTML doc has finished loading. may take down later ..
 var gasKey = "WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y";
 var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public";
-
-var cityApiKey ="1dIcTElI66WvN1pN1tuvnw==sPZpayHEUdUki5rP";
-var cityApiLink= "https://api.api-ninjas.com/v1/city?name=";
-var cityApiUrl = cityApiLink + "&key=" + cityApiKey; // not sure if this is right format...TM
-
 var gmapsKey = "&key=AIzaSyAEixeDUTRcNwCXOgNXbeiS2yd-F6g4SZY"; 
 var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var reverseGeoLink = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
@@ -19,6 +14,14 @@ var zipInputEl = document.getElementById('search-input');
 var fuelTypeInputEl = document.getElementById("fuel-type");
 var btnEl = document.getElementById("search-button"); 
 var resultsContainer = document.getElementById("results-container");
+
+// var smartyAuthID = "d981697d-7ffd-45a7-bf5a-4d725c190cd0"
+// var smartyAuthToken =  'tjB4Cv3Plir0aCF25En8'
+// var smartyUrl = "https://us-zipcode.api.smarty.com/lookup?"
+
+
+"85c64b60-259a-11ee-ba64-cd4912edca12"
+var smartyUrl= "https://app.zipcodebase.com/api/v1/code/city?apikey=85c64b60-259a-11ee-ba64-cd4912edca12"
 
 /*Functions Below
 ___________________________________________*/
@@ -32,50 +35,33 @@ function handleUserInput(event) {
    event.preventDefault();// is there a better way do this? prevent propogation?
    var fuelTypeInput = fuelTypeInputEl.value;
    var zipInput = zipInputEl.value;
-   getCityInfo(zipInput)
+   runFuelApi(fuelTypeInput, zipInput)
    .then(function(cityInfo){
-    var {latitude, longitude }= cityInfo;
-    runFuelApi(fuelTypeInput,latitude, longitude);
+    console.log(cityInfo)
    })
    .catch(function(error){
     console.log(error);
    });
 }
- // ------------------SECOND API------------------
-function getCityInfo(zip){       /// -----Sample for this api was using JQUERY ".ajax" and had to look up how to convert that to vanilla JavaScript. dont fully understand but will read up-TM
-  var cityApiUrl = cityApiLink + zip;
-  var headers = { 'X-Api-Key': cityApiKey };
 
-return fetch(cityApiUrl, {headers: headers })
-.then(function(response){
-  if(!response.ok){
-    throw new Error('City API reuqest failed');
-  }
-  return response.json();
-})
-.then(function(data){
-  var{latitude, longitude} = data;
-  return {latitude, longitude};
-})
-.catch(function(error){
-  console.error('Error', error);
-  throw error;
-});
-  
-}
+//
 
 
 
 
-function runFuelApi(fuelType, latitude, longitude){
-  var urlFuel= gasApiUrl + "&fuel_type=" + fuelType + "&latitude=" + latitude + "&longitude=" + longitude + "";
-  fetch(urlFuel)
+function runFuelApi(fuelType, city){
+  // var urlFuel= gasApiUrl + "&fuel_type=" + fuelType + "&latitude=" + latitude + "&longitude=" + longitude + "&limit=5";
+   //var urlFuel= gasApiUrl + "&fuel_type=" + fuelType + "&city="+ city + "&limit=5";
+  //  var urlFuel= gasApiUrl + "&fuel_type=" + "ELEC" + "&city="+ "Oakland" + "&ev_network=all" + "&limit=5";
+  var cityZipUrl= smartyUrl + "city=" + city + "&country=us" 
+  fetch("https://app.zipcodebase.com/api/v1/code/city?apikey=85c64b60-259a-11ee-ba64-cd4912edca12&city="+city+"&country=us&limit=5")
   .then(function(response){
     return response.json();
   })
   .then(function(data){
     console.log(data);
-    displayGastStations(data.fuel_stations)
+    //displayGastStations(data.fuel_stations)
+
   })
 }
 
@@ -257,6 +243,30 @@ ___________________________________________*/
 //       console.log(data);
 //    })
 //  }
+
+
+ // ------------------SECOND API------------------
+// function getCityInfo(zip){       /// -----Sample for this api was using JQUERY ".ajax" and had to look up how to convert that to vanilla JavaScript. dont fully understand but will read up-TM
+//   var cityApiUrl = cityApiLink + zip;
+//   var headers = { 'X-Api-Key': cityApiKey };
+
+// return fetch(cityApiUrl, {headers: headers })
+// .then(function(response){
+//   if(!response.ok){
+//     throw new Error('City API reuqest failed');
+//   }
+//   return response.json();
+// })
+// .then(function(data){
+//   var{latitude, longitude} = data;// what does destructuring mean? RESEARCH
+//   return {latitude, longitude};
+// })
+// .catch(function(error){
+//   console.error('Error', error);
+//   throw error; // RESEARCH THROW
+// });
+  
+// }
 
 Variables
    Conditionals 
