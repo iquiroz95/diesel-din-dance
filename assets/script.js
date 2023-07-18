@@ -68,7 +68,7 @@ return fetch(cityApiUrl, {headers: headers })
 
 
 function runFuelApi(fuelType, latitude, longitude){
-  var urlFuel= gasApiUrl + "&fuel_type=" + fuelType + "&latitude=" + latitude + "&longitude=" + longitude;
+  var urlFuel= gasApiUrl + "&fuel_type=" + fuelType + "&latitude=" + latitude + "&longitude=" + longitude + "";
   fetch(urlFuel)
   .then(function(response){
     return response.json();
