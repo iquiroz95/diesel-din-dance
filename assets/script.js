@@ -2,7 +2,7 @@
 
 /* Variables Below
 ___________________________________________*/
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function(){ // this ensures the code executre only after the HTML doc has finished loading. may take down later ..
 var gasKey = "WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y";
 var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public";
 
@@ -69,9 +69,12 @@ function displayGastStations(gasStations) {
   resultsContainer.innerHTML= '';// Need to DISPLAY RESULTS. 
   gasStations.forEach(function(gasStation){
     var stationElement = document.createElement('div');
-    var address = gasStation.street_address;
-    stationElement.textContent= address;
+    var address = gasStation.street_address; //was searching for value "address" instead of "street_address"
+    var city = gasStation.city;
+    var state = gasStation.state;
+    stationElement.textContent= city + " , " + state + " , " + address;
     resultsContainer.appendChild(stationElement);
+    console.log(city)
     
   })
 }
