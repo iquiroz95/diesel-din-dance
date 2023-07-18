@@ -42,16 +42,26 @@ function handleUserInput(event) {
    });
 }
  // ------------------SECOND API------------------
-function getCityInfo(zip){
-  var cityApiUrl = cityApiLink + zip + "&key=" + cityApiKey;
-  return fetch(cityApiUrl)
-  .then(function(response){
-    return response.json();
-  })
-  .then(function(data){
-    var{latitude, longitude} = data;
-    return{ latitude, longitude};
-    });
+function getCityInfo(zip){       /// -----Sample for this api was using JQUERY ".ajax" and had to look up how to convert that to vanilla JavaScript. dont fully understand but will read up-TM
+  var cityApiUrl = cityApiLink + zip;
+  var headers = { 'X-Api-Key': cityApiKey};
+
+return fetch(cityApiUrl, {headers:headers})
+.then(function(response){
+  if(!response.ok){
+    throw new Error('City API reuqest failed');
+  }
+  return response.json();
+})
+.then(function(data){
+  var{latitude, longitude} = data;
+  return {latitude, longitude};
+})
+.catch(function(error){
+  console.error('Error', error);
+  throw error;
+});
+  
 }
 
 
