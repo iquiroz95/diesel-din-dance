@@ -32,7 +32,7 @@ ___________________________________________*/
    
 
 function handleUserInput(event) {
-   event.preventDefault();// is there a better way do this? prevent propogation?
+   event.preventDefault();
    var fuelTypeInput = fuelTypeInputEl.value;
    var zipInput = zipInputEl.value;
    runFuelApi(fuelTypeInput, zipInput)
