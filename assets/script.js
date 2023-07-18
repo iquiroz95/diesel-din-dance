@@ -8,6 +8,7 @@ var gasApiUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_k
 
 var cityApiKey ="1dIcTElI66WvN1pN1tuvnw==sPZpayHEUdUki5rP";
 var cityApiLink= "https://api.api-ninjas.com/v1/city?name=";
+var cityApiUrl = cityApiLink + "&key=" + cityApiKey; // not sure if this is right format...TM
 
 var gmapsKey = "&key=AIzaSyAEixeDUTRcNwCXOgNXbeiS2yd-F6g4SZY"; 
 var geocodeLink = "https://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -28,27 +29,74 @@ ___________________________________________*/
    
 
 function handleUserInput(event) {
-   event.preventDefault()// is there a better way do this? prevent propogation?
+   event.preventDefault();// is there a better way do this? prevent propogation?
    var fuelTypeInput = fuelTypeInputEl.value;
    var zipInput = zipInputEl.value;
-   runFuelApi(fuelTypeInput,zipInput);
+   getCityInfo(zipInput)
+   .then(function(cityInfo){
+    var {latitude, longitude }= cityInfo;
+    runFuelApi(fuelTypeInput,latitude, longitude);
+   })
+   .catch(function(error){
+    console.log(error);
+   });
+}
+ // ------------------SECOND API------------------
+function getCityInfo(zip){       /// -----Sample for this api was using JQUERY ".ajax" and had to look up how to convert that to vanilla JavaScript. dont fully understand but will read up-TM
+  var cityApiUrl = cityApiLink + zip;
+  var headers = { 'X-Api-Key': cityApiKey};
+
+return fetch(cityApiUrl, {headers:headers})
+.then(function(response){
+  if(!response.ok){
+    throw new Error('City API reuqest failed');
+  }
+  return response.json();
+})
+.then(function(data){
+  var{latitude, longitude} = data;
+  return {latitude, longitude};
+})
+.catch(function(error){
+  console.error('Error', error);
+  throw error;
+});
+  
 }
 
-function runFuelApi(fuelType,zip) {
-  var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit"
-  fetch(urlFuel)
-  .then(function (response) {
-     return response.json();
-  })
-  .then(function (data) {
-   // data.forEach(this) //Reasearch this method to get children 
-      console.log(data)
-      displayGastStations(data.fuel_stations);
-     })
-  }
 
-  //Append Results to the web page. (appened results-container)
+function runFuelApi(fuelType, latitude, longitude){
+  var urlFuel= gasApiUrl + "&fuel_type=" + fuelType + "&latitude=" + latitude + "&longitude=" + longitude;
+  fetch(urlFuel)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(data){
+    console.log(data);
+    displayGastStations(data.fuel_stations)
+  })
+}
+
+
+// -------------------OLDER VERSION OF RUNFUELAPI FUNCTION---------------------
+// function runFuelApi(fuelType,latitude,longitude) {
+//   var urlFuel = gasApiUrl + "&fuel_type=" + fuelType + "&zip=" + zip + "&limit"
+//   fetch(urlFuel)
+//   .then(function (response) {
+//      return response.json();
+//   })
+//   .then(function (data) {
+//    // data.forEach(this) //Reasearch this method to get children 
+//       console.log(data)
+//       displayGastStations(data.fuel_stations);
+//      })
+//   }
+
+  
+  //Append Results to the web page. (appened results-container) (DONE 6/17)
   // Find second API (city api)
+
+
 // Infor to pull from API - Address of Gas Station 
 // Find CSS library not BOOTSTRAP
 // JS library called sweet alerts (link)
@@ -63,6 +111,7 @@ function runFuelApi(fuelType,zip) {
 
 //FUNCTION TO DISPLAY RESULTS
 
+
 function displayGastStations(gasStations) {
   console.log(gasStations)
   //var resultContainer= document.getElementsByClassName("results-container");
@@ -72,7 +121,7 @@ function displayGastStations(gasStations) {
     var address = gasStation.street_address; //was searching for value "address" instead of "street_address"
     var city = gasStation.city;
     var state = gasStation.state;
-    stationElement.textContent= city + " , " + state + " , " + address;
+    stationElement.textContent= city + " , " + state + " , " + address; // create a var and follow the path from the api to pull the info you want to show 
     resultsContainer.appendChild(stationElement);
     console.log(city)
     
