@@ -9,29 +9,34 @@
 </head>
 <body>
     <header>
-        <h1 class="header-container title">Diesel Locator</h1>
+        <h1 class="header-container title is-1">
+            Diesel Locator
+            <img src="./assets/images/dddlogo_720.jpg" class="image is-128x128 align-center container">
+        </h1>
     </header>
-    <main>
-        <section class="">
+    <main class="block">
+        <span class="icon"></span>
+        <section class="container search-container column is-two-fifths">
+            <div class="title is-3">Find Gas Stations By:</div>
             <form id="search-form" class="form-container">
-                <label for="search-input" value="zip"> Enter Zip Code: </label><br>
-                <input type="text" id="search-input" placeholder="Enter Here!" class="form-input" name="search-form"><br>
-                <br>
-                <label for="fuel-type">Select Fuel Type:</label><br>
+                <label for="search-input" value="zip" class="title"><strong>Enter Zip Code: </strong></label><br><br>
+                <input type="text" id="search-input" placeholder="Enter Here!" class="form-input" name="search-form"><br><br>
+                <label for="fuel-type" class="title"><strong>Select Fuel Type: </strong></label><br><br>
                 <select name="fuel-type" id="fuel-type">
-                    <option>-select-</option>
-                    <option value="BD" id="BD">Bio Diesel</option>
-                    <option value="ELEC" id="ELEC">Electric</option>
-                    <option value="RD" id="RD">Renewable-Diesel</option>
-                    <option value="LPG" id="LPG">Propane</option>
+                    <option class="dropdown-divider ">-select-</option>
+                    <option value="BD" id="BD" class="dropdown-item">Bio Diesel</option>
+                    <option value="ELEC" id="ELEC" class="dropdown-item">Electric</option>
+                    <option value="RD" id="RD" class="dropdown-item">Renewable-Diesel</option>
+                    <option value="LPG" id="LPG" class="dropdown-item">Propane</option>
                 </select><br><br>
-                <button type="submit" id="search-button">Search</button>
+                <button type="submit" id="search-button"><strong>Search</strong></button>
             </form>
         </section>
         <br><br>
-        <section class="results">
+        <section class="container results column is three-fifths">
+            <div class="title is-3">Search Results Below:</div>
             <div id="results-container" class="results-container">
-                <h3 id="results-test">Results Container Header Placeholder</h3>
+                <h3 id="results-test" class="title is-3">Results Container</h3>
             </div>
         </section>
     </main>
@@ -40,7 +45,6 @@
 <script src="assets/script.js"></script>
 </body>
 </html>
-
 <!--  https://bulma.io/documentation/overview/modular/
 <section class="section">
     <div class="container">
