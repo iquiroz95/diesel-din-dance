@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(){ // this ensures the co
     for (var i = 0; i < gasStations.length; i++){ // itterate through the array of gas stations we are given from results of gasAPI
       var gasStation = gasStations[i]
       var addressEl = document.createElement("li")// create a list element to display list of results
-      addressEl.innerText= gasStation.street_address //pulling the street address from the gasStations array
+      addressEl.innerText= gasStation.street_address + ", " + gasStation.city + ", " + gasStation.state //pulling the street address from the gasStations array
       document.querySelector(".results-container").appendChild(addressEl)//append the address of gas stations!
     }
   }
