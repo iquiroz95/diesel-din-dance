@@ -17,7 +17,7 @@
             <img src="assets/images/dddLogo.jpg" class="image is-128x128 align-center container">
         </h1>
     </header>
-    <main class="block">
+    <main class="block container">
         <span class="icon"></span>
         <section class="container search-container column is-two-fifths">
             <div class="title is-3">Find Gas Stations By:</div>
@@ -26,21 +26,25 @@
                 <input type="text" id="search-input" placeholder="Enter Here!" class="form-input"
                     name="search-form"><br><br>
                 <label for="fuel-type" class="title"><strong>Select Fuel Type: </strong></label><br><br>
-                <select name="fuel-type" id="fuel-type">
+                <select name="fuel-type" id="fuel-type" class="dropdown-container">
                     <option class="dropdown-divider ">-select-</option>
-                    <option value="BD" id="BD" class="dropdown-item">Bio Diesel</option>
                     <option value="ELEC" id="ELEC" class="dropdown-item">Electric</option>
                     <option value="RD" id="RD" class="dropdown-item">Renewable-Diesel</option>
+                    <option value="BD" id="BD" class="dropdown-item">Bio Diesel</option>
                     <option value="LPG" id="LPG" class="dropdown-item">Propane</option>
+                    <option value="Hydrogen" id="Hydrogen" class="dropdown-item">Hydrogen</option>
+                    <option value="E85" id="E85" class="dropdown-item">Ethanol</option>
+                    <option value="CNG" id="CNG" class="dropdown-item">Compressed Natural Gas</option>
+                    <option value="LNG" id="LNG" class="dropdown-item">Liquified Natural Gas</option>
                 </select><br><br>
-                <button type="submit" id="search-button"><strong>Search</strong></button>
+                <button type="submit" id="search-button">Search</button>
             </form>
         </section>
         <br><br>
-        <section class="container results column is three-fifths">
+        <section class="container results column is-half">
             <div class="title is-3">Search Results Below:</div>
             <div id="results-container" class="results-container">
-                <h3 id="results-test" class="title is-3">Results Container</h3>
+                <h3 id="results-test" class="title is-3">Results here!</h3>
             </div>
         </section>
     </main>
@@ -51,12 +55,3 @@
 </body>
 
 </html>
-<!--  https://bulma.io/documentation/overview/modular/
-<section class="section">
-    <div class="container">
-      <h1 class="title">
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-    </div>
-  </section>  -->
