@@ -24,7 +24,7 @@ The goal of this web app is to create a space for a user to search a city they a
 
 Here is a screenshot of our final page:
 
-![Gas-Station-Locator](./) //ADD SCREEN SHOT HERE
+![Gas-Station-Locator](./assets/images/MAIN_Web_page_%20Jul%2019,%202023%208_01%20AM.gif) 
 
 ## Learning-Points
 
