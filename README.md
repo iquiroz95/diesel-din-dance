@@ -59,8 +59,12 @@ function runZipsApi(city){
 
 
 ### Aaron Lam
+* [Portfolio](https://alam2tg.github.io/alamtimecapsule/)
+* [LinkedIn](https://linkedin.com/in/lam-aaron2/)
+* [Github](https://github.com/alam2tg)
 
 ### Isai Quiroz
+
 
 ### Thomas Munzar
 
