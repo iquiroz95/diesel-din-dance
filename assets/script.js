@@ -15,11 +15,35 @@ document.addEventListener("DOMContentLoaded", function(){ // this ensures the co
   var zipCodeUrl= "https://app.zipcodebase.com/api/v1/code/city?apikey=85c64b60-259a-11ee-ba64-cd4912edca12"
   var gasApi = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?&api_key=WeUe2S9Wb1CvTZt1wVPAi7J3CvEuzPwpRT0w4N7y&access=public"
   
+
+
   
   function handleUserInput(event) {
      event.preventDefault();
     var cityInput = cityInputEl.value;
      runZipsApi(cityInput)
+     let timerInterval
+     Swal.fire({
+       title: 'Preparing Fuel!',
+       html: 'I will close in <b></b> milliseconds.',
+       timer: 1500,
+       timerProgressBar: true,
+       didOpen: () => {
+         Swal.showLoading()
+         const b = Swal.getHtmlContainer().querySelector('b')
+         timerInterval = setInterval(() => {
+           b.textContent = Swal.getTimerLeft()
+         }, 100)
+       },
+       willClose: () => {
+         clearInterval(timerInterval)
+       }
+     }).then((result) => {
+       /* Read more about handling dismissals below */
+       if (result.dismiss === Swal.DismissReason.timer) {
+         console.log('I was closed by the timer')
+       }
+     })
   }
   
   
