@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){ // this ensures the co
      Swal.fire({
        title: 'Preparing Fuel!',
        html: 'I will close in <b></b> milliseconds.',
-       timer: 1500,
+       timer: 1200,
        timerProgressBar: true,
        didOpen: () => {
          Swal.showLoading()
